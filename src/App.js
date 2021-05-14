@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+
+const user = {
+  email: 'gwen@example.com',
+  type: 'Staff'
+}
+
+function useUserType(currentUser) {
+  let isAdmin = false;
+
+  switch (currentUser.type) {
+    case 'Staff':
+        isAdmin = false;
+        break;
+    case 'Admin':
+        isAdmin = true;
+        break;
+  }
+  return [isAdmin];
+}
 
 function App() {
+  const [isAdmin] = useUserType(user);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>
+        {
+          isAdmin ? 'Admin user' : 'Not admin user'
+        }
+      </p>
     </div>
   );
 }
